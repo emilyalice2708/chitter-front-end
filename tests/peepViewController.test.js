@@ -1,9 +1,13 @@
 import { jest } from '@jest/globals';
 import PeepViewController from '../models/peepViewController.js';
+import PeepView from '../models/peepView.js';
+
+jest.mock('../models/peepView.js')
 
 describe('allPeeps', () => {
   let mockFetch;
   let controller;
+  let mockPeepView;
 
   beforeEach(() => {
     controller = new PeepViewController();
@@ -11,6 +15,7 @@ describe('allPeeps', () => {
       json: () => { return [{"body": "first peep"}] }
     })
     global.fetch = mockFetch
+    mockPeepView = new PeepView();
   });
 
   it('calls fetch with the url', async () => {
@@ -18,6 +23,16 @@ describe('allPeeps', () => {
       await controller.allPeeps();
 
       expect(mockFetch.mock.calls[0][0]).toEqual("https://chitter-backend-api-v2.herokuapp.com/peeps")
+    } catch(error) {
+      throw error;
+    }
+  });
+
+  it('calls peepView.html with the data', async () => {
+    try {
+      await controller.allPeeps();
+
+      expect(mockPeepView.makeHTML.mock.calls[0][0]).toEqual([{"body": "first peep"}]);
     } catch(error) {
       throw error;
     }
