@@ -22,8 +22,8 @@
     <div id="signed-in"></div>
     <div id="welcome"></div>
     <form id="post-peep" action="#peeps/new" method="post">
-      <input type='text', name='peep-body', placeholder="Lot's to talk about">
-      <input type='submit' value='Post Peep'>
+      <input id="post-body" type='hidden', name='peep-body', placeholder="Lot's to talk about">
+      <input id="post-button" type='hidden' value='Post Peep'>
     </form>
     <div id="peeps"></div>
     <script type="module" src="./models/peepViewController.js"></script>
