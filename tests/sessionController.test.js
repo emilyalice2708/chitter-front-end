@@ -1,11 +1,15 @@
 import { jest } from '@jest/globals';
 import SessionController from '../models/sessionController.js';
+import PeepViewController from '../models/peepViewController.js';
+
+jest.mock('../models/peepViewController')
 
 describe('signIn', () => {
   let mockFetch;
   let controller;
   let container;
   let signedIn;
+  let mockPeepController;
 
   beforeEach(() => {
     mockFetch = jest.fn().mockResolvedValue({
@@ -46,12 +50,18 @@ describe('signIn', () => {
       signedIn = document.createElement("div")
       signedIn.setAttribute('id', 'signed-in')
       document.body.appendChild(signedIn);
+      mockPeepController = new PeepViewController()
     })
 
     it('displays logged-in message to user if sign-in is successful', () => {
       controller.completeSignIn({id: 1, handle: "newuser"})
       let message = document.getElementById('signed-in')
       expect(message.innerHTML).toEqual("You're logged in. You can now post a peep!")
+    })
+
+    it('calls on PeepViewController to render post peeps form', () => {
+      controller.completeSignIn({id: 1, handle: "newuser"})
+      expect(mockPeepController.postPeep).toHaveBeenCalled
     })
   })
 })
