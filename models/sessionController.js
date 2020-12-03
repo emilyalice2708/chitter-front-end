@@ -12,9 +12,22 @@ export default class SessionController {
         }
       });
       const session = await result.json()
+      this.completeSignIn(session)
     } catch (e) {
+      this.invalidSession()
       return null;
     }
   };
+
+  invalidSession() {
+    var signInError = document.getElementById("sign-in-error")
+    signInError.innerHTML = "Incorrect user or password!"
+    return
+  }
+
+  completeSignIn(session) {
+    var signedIn = document.getElementById('signed-in')
+    signedIn.innerHTML = `You're logged in. You can now post a peep!`
+  }
 
 }
