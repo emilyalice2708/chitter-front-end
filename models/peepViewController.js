@@ -15,6 +15,20 @@ export default class PeepViewController {
       return null;
     }
   }
+
+
+  async singlePeep(id) {
+    try {
+      const result = await fetch(
+        `https://chitter-backend-api-v2.herokuapp.com/peeps/${id}`
+      );
+      const data = await result.json()
+      peepView.singlePeepHTML(data)
+    } catch(e) {
+      console.log(e)
+      return null;
+    }
+  };
 };
 
 const controller = new PeepViewController()
