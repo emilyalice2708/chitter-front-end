@@ -53,7 +53,7 @@ describe('singlePeep', () => {
     global.fetch = mockFetch
   });
 
-  it('calls fetch with correct url', async () => {
+  it('calls fetch with correct url and id', async () => {
     try {
       await controller.singlePeep(1);
 
