@@ -11,11 +11,9 @@ export default class PeepViewController {
       const data = await result.json()
       peepView.makeHTML(data)
     } catch (e) {
-      console.log(e)
       return null;
     }
   }
-
 
   async singlePeep(id) {
     try {
@@ -25,10 +23,9 @@ export default class PeepViewController {
       const data = await result.json()
       peepView.singlePeepHTML(data)
     } catch(e) {
-      console.log(e)
       return null;
     }
-  };
+  }
 
   hashListener() {
     window.addEventListener("hashchange", function(){
@@ -37,7 +34,35 @@ export default class PeepViewController {
       this.singlePeep(id)
     }.bind(this));
   }
-};
+
+  postPeep(user_id, session_key) {
+    let postPeep = document.getElementById("post-peep")
+    if(!postPeep) return;
+    postPeep.addEventListener('submit', function(event){
+      event.preventDefault();
+      let body = event.srcElement[0].value
+      this.createPeep(user_id, session_key, body)
+    }.bind(this))
+  }
+
+  async createPeep(user_id, session_key, body) {
+    try {
+      await fetch(
+        "https://chitter-backend-api-v2.herokuapp.com/peeps", {
+        method: 'POST',
+        body: JSON.stringify({peep: {user_id: `${user_id}`, body:`${body}`}}),
+        dataType: 'json',
+        headers: {
+          'Authorization': `Token token=${session_key}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      this.allPeeps()
+    } catch (e) {
+      return null;
+    }
+  }
+}
 
 const controller = new PeepViewController()
 controller.allPeeps()

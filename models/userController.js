@@ -13,18 +13,17 @@ export default class UserController{
       const user = await result.json()
       this.completeSignUp(user)
     } catch (e) {
-      console.log(e)
       return null;
     }
-  };
+  }
 
   completeSignUp(user) {
-    if(user.handle == "has already been taken") {
-      this.usernameTaken()
-    } else {
-      var welcome = document.getElementById("welcome")
-      welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
-    }
+    user.handle == "has already been taken" ? this.usernameTaken() : this.welcomeUser(user.handle)
+  }
+
+  welcomeUser(handle) {
+    var welcome = document.getElementById("welcome")
+    welcome.innerHTML = `Welcome to Chitter, ${handle}. Sign in to post a peep!`
   }
 
   usernameTaken() {
