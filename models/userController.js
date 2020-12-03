@@ -27,9 +27,12 @@ export default class UserController{
   }
 
   completeSignUp(user) {
-    if (user.handle == "has already been taken") this.usernameTaken()
-    var welcome = document.getElementById("welcome")
-    welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
+    if(user.handle == "has already been taken") {
+      this.usernameTaken()
+    } else {
+      var welcome = document.getElementById("welcome")
+      welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
+    }
   }
 
   getUserData(){
