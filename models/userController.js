@@ -1,4 +1,3 @@
-
 export default class UserController{
   async signUp(handle, password) {
     try {
@@ -12,9 +11,39 @@ export default class UserController{
         }
       });
       const user = await result.json()
+      this.completeSignUp(user)
     } catch (e) {
       console.log(e)
       return null;
     }
   };
+
+  usernameTaken() {
+    var signUpError = document.createElement("div")
+    signUpError.setAttribute("id", "sign-up-error")
+    signUpError.innerHTML = "That username is taken!"
+    document.body.appendChild(signUpError)
+    return
+  }
+
+  completeSignUp(user) {
+    console.log(user)
+    if (user.handle == "has already been taken") this.usernameTaken()
+    var welcome = document.getElementById("welcome")
+    welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
+  }
+
+  getUserData(){
+    let signup = document.getElementById("signup")
+    if(!signup) return;
+    signup.addEventListener('submit', function(event){
+      event.preventDefault();
+      let handle = event.srcElement[0].value
+      let password = event.srcElement[1].value
+      this.signUp(handle, password)
+    }.bind(this))
+  }
 }
+
+let userController = new UserController()
+userController.getUserData()
