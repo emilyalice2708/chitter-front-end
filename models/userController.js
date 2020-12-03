@@ -27,7 +27,6 @@ export default class UserController{
   }
 
   completeSignUp(user) {
-    console.log(user)
     if (user.handle == "has already been taken") this.usernameTaken()
     var welcome = document.getElementById("welcome")
     welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
