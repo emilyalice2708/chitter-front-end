@@ -18,14 +18,6 @@ export default class UserController{
     }
   };
 
-  usernameTaken() {
-    var signUpError = document.createElement("div")
-    signUpError.setAttribute("id", "sign-up-error")
-    signUpError.innerHTML = "That username is taken!"
-    document.body.appendChild(signUpError)
-    return
-  }
-
   completeSignUp(user) {
     if(user.handle == "has already been taken") {
       this.usernameTaken()
@@ -33,6 +25,14 @@ export default class UserController{
       var welcome = document.getElementById("welcome")
       welcome.innerHTML = `Welcome to Chitter, ${user.handle}. Sign in to post a peep!`
     }
+  }
+
+  usernameTaken() {
+    var signUpError = document.createElement("div")
+    signUpError.setAttribute("id", "sign-up-error")
+    signUpError.innerHTML = "That username is taken!"
+    document.body.appendChild(signUpError)
+    return
   }
 
   getUserData(){
