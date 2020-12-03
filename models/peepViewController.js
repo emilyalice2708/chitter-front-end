@@ -38,6 +38,7 @@ export default class PeepViewController {
   postPeep(user_id, session_key) {
     let postPeep = document.getElementById("post-peep")
     if(!postPeep) return;
+    this.revealPostForm()
     postPeep.addEventListener('submit', function(event){
       event.preventDefault();
       let body = event.srcElement[0].value
@@ -45,6 +46,13 @@ export default class PeepViewController {
     }.bind(this))
   }
 
+  revealPostForm() {
+    const postButton = document.getElementById('post-button')
+    const postBody = document.getElementById('post-body')
+    postButton.setAttribute('type', 'submit')
+    postBody.setAttribute('type', 'text')
+  }
+  
   async createPeep(user_id, session_key, body) {
     try {
       await fetch(
