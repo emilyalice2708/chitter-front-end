@@ -29,7 +29,16 @@ export default class PeepViewController {
       return null;
     }
   };
+
+  hashListener() {
+    window.addEventListener("hashchange", function(){
+      let extension = window.location.hash.split('#')
+      let id = extension[1].split("/")[1]
+      this.singlePeep(id)
+    }.bind(this));
+  }
 };
 
 const controller = new PeepViewController()
 controller.allPeeps()
+controller.hashListener()
