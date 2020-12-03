@@ -20,6 +20,10 @@ describe('signUp', () => {
     document.body.appendChild(container);
   });
 
+  afterEach(() => {
+    document.body.innerHTML = ""
+  })
+
   it('calls fetch with the handle and password', async () => {
     try {
       await controller.signUp("newuser", "pword");
@@ -35,11 +39,18 @@ describe('signUp', () => {
   it('welcomes the user', async () => {
     try {
       await controller.signUp("newuser", "pword");
+      let welcome = document.getElementById('welcome')
 
-      expect(document.body.innerHTML).toEqual("<div id=\"welcome\">Welcome to Chitter, newuser. Sign in to post a peep!</div><div id=\"welcome\"></div>")
+      expect(welcome.innerHTML).toEqual("Welcome to Chitter, newuser. Sign in to post a peep!")
     } catch(error) {
       throw error;
     }
+  })
+
+  it('displays sign-up error to user if sign-up is unsuccessful', async () => {
+    controller.completeSignUp({id: 1, handle: "has already been taken"})
+    let error = document.getElementById('sign-up-error')
+    expect(error.innerHTML).toEqual("That username is taken!")
   })
 
 })
