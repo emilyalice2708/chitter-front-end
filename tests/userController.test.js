@@ -24,33 +24,31 @@ describe('signUp', () => {
     document.body.innerHTML = ""
   })
 
-  it('calls fetch with the handle and password', async () => {
-    try {
-      await controller.signUp("newuser", "pword");
+  describe('signUp', () => {
+    it('calls fetch with the handle and password', async () => {
+      try {
+        await controller.signUp("newuser", "pword");
 
-      expect(mockFetch.mock.calls[0][0]).toEqual("https://chitter-backend-api-v2.herokuapp.com/users")
-      expect(mockFetch.mock.calls[0][1].body).toEqual("{\"user\":{\"handle\":\"newuser\",\"password\":\"pword\"}}")
-    } catch(error) {
-      throw error;
-    }
-  });
+        expect(mockFetch.mock.calls[0][0]).toEqual("https://chitter-backend-api-v2.herokuapp.com/users")
+        expect(mockFetch.mock.calls[0][1].body).toEqual("{\"user\":{\"handle\":\"newuser\",\"password\":\"pword\"}}")
+      } catch(error) {
+        throw error;
+      }
+    });
+  })
 
-
-  it('welcomes the user', async () => {
-    try {
-      await controller.signUp("newuser", "pword");
+  describe('completeSignUp', () => {
+    it('displays welcome message if sign-up is successful', () => {
+      controller.completeSignUp({id: 1, handle: "newuser"})
       let welcome = document.getElementById('welcome')
 
       expect(welcome.innerHTML).toEqual("Welcome to Chitter, newuser. Sign in to post a peep!")
-    } catch(error) {
-      throw error;
-    }
-  })
+    })
 
-  it('displays sign-up error to user if sign-up is unsuccessful', async () => {
-    controller.completeSignUp({id: 1, handle: "has already been taken"})
-    let error = document.getElementById('sign-up-error')
-    expect(error.innerHTML).toEqual("That username is taken!")
+    it('displays sign-up error to user if sign-up is unsuccessful', () => {
+      controller.completeSignUp({id: 1, handle: "has already been taken"})
+      let error = document.getElementById('sign-up-error')
+      expect(error.innerHTML).toEqual("That username is taken!")
+    })
   })
-
 })
