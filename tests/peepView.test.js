@@ -51,7 +51,8 @@ describe('PeepView', () => {
         likes: [
           ["first"], ["second"]]
         })
-      expect(container.innerHTML).toEqual("<li>user1 posted:<br> peep <br> Likes: 2 </li>")
+      const singlePeep = '<li>user1 posted:<br> peep <br> Likes: 2 </li>'
+      expect(container.innerHTML).toEqual(singlePeep)
     })
   })
 })
