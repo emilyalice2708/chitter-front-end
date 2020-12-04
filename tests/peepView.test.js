@@ -1,27 +1,24 @@
 import PeepView from '../models/peepView.js';
 
 describe('PeepView', () => {
-  let peepView;
-  let list;
-  let container;
-
-  beforeEach(() => {
-    peepView = new PeepView()
-    list = [{
-      body: "peep", user: {
+  const peepView = new PeepView()
+  const list = [{
+    body: "peep", user: {
+      handle: "user1"
+    }, 
+    id: "1", likes: [
+      ["first"], ["second"]]
+    }, {
+      body: "peep 2", 
+      user: {
         handle: "user1"
       }, 
-      id: "1", likes: [
+      id: "2", likes: [
         ["first"], ["second"]]
-      }, {
-        body: "peep 2", 
-        user: {
-          handle: "user1"
-        }, 
-        id: "2", likes: [
-          ["first"], ["second"]]
-        }]
-    container = document.createElement("div");
+      }]
+  const container = document.createElement("div");
+  
+  beforeEach(() => {
     container.setAttribute('id', 'peeps')
     document.body.appendChild(container);
   })
