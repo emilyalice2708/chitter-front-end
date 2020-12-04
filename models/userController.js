@@ -4,7 +4,11 @@ export default class UserController{
       const result = await fetch(
         "https://chitter-backend-api-v2.herokuapp.com/users", {
         method: 'POST',
-        body: JSON.stringify({user: {handle: `${handle}`, password:`${password}`}}),
+        body: JSON.stringify({
+          user: {
+            handle: `${handle}`, password:`${password}`
+          }
+        }),
         dataType: 'json',
         headers: {
           'Content-Type': 'application/json'

@@ -58,7 +58,11 @@ export default class PeepViewController {
       await fetch(
         "https://chitter-backend-api-v2.herokuapp.com/peeps", {
         method: 'POST',
-        body: JSON.stringify({peep: {user_id: `${user_id}`, body:`${body}`}}),
+        body: JSON.stringify({
+          peep: {
+            user_id: `${user_id}`, body:`${body}`
+          }
+        }),
         dataType: 'json',
         headers: {
           'Authorization': `Token token=${session_key}`,
