@@ -3,13 +3,16 @@ import PeepView from '../models/peepView.js';
 describe('PeepView', () => {
   const peepView = new PeepView()
   const list = [{
-    body: "peep", user: {
+    body: "peep", 
+    created_at: "2020-12-03T17:18:45.321Z",
+    user: {
       handle: "user1"
     }, 
     id: "1", likes: [
       ["first"], ["second"]]
     }, {
       body: "peep 2", 
+      created_at: "2020-12-03T17:18:45.321Z",
       user: {
         handle: "user1"
       }, 
@@ -27,9 +30,11 @@ describe('PeepView', () => {
     it('Adds peep list to document', () => {
       const htmlList = `<li>user1 posted:<br> peep <br>` +
       ` Likes: 2 ` +
+      ` Posted on 03/12/2020, at 17:18` +
       `<a id=\"1\" href=\"#peeps/1\">View Peep</a></li>` +
       `<li>user1 posted:<br> peep 2 <br>` +
       ` Likes: 2 ` +
+      ` Posted on 03/12/2020, at 17:18` +
       `<a id=\"2\" href=\"#peeps/2\">View Peep</a></li>`
       peepView.makeHTML(list)
       expect(container.innerHTML).toEqual(htmlList)
