@@ -42,7 +42,15 @@ describe('PeepView', () => {
   describe('#singlePeepHTML', () => {
     it('Replaces list with single peep', () => {
       peepView.makeHTML(list)
-      peepView.singlePeepHTML({body: "peep", user: {handle: "user1"}, id: "1", likes: [["first"], ["second"]]})
+      peepView.singlePeepHTML({
+        body: "peep", 
+        user: {
+          handle: "user1"
+        }, 
+        id: "1",
+        likes: [
+          ["first"], ["second"]]
+        })
       expect(container.innerHTML).toEqual("<li>user1 posted:<br> peep <br> Likes: 2 </li>")
     })
   })
