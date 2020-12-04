@@ -120,4 +120,11 @@ describe('PeepViewController', () => {
       expect(submitInput.type).toEqual('submit')
     })
   })
+
+  describe('postPeep', () => {
+    it('calls revealPostForm', () => {
+      controller.postPeep()
+      expect(controller.revealPostForm()).toHaveBeenCalled
+    })
+  })
 })
