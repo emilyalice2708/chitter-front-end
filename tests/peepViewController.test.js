@@ -92,7 +92,7 @@ describe('PeepViewController', () => {
       global.fetch = mockFetch
     });
     
-    it('calls fetch with correct url and then fecthes all peeps again', async () => {
+    it('fetches all peeps', async () => {
       const url = 'https://chitter-backend-api-v2.herokuapp.com/peeps'
       try {
         await controller.createPeep();
@@ -102,5 +102,22 @@ describe('PeepViewController', () => {
         throw error;
       }
     });
+  })
+
+  describe('revealPostForm', () => {
+    const textInput = document.createElement('input')
+    const submitInput = document.createElement('input')
+
+    it('Sets type-attributes of post form inputs', () => {
+      textInput.setAttribute('id', 'post-body')
+      submitInput.setAttribute('id', 'post-button')
+      document.body.appendChild(textInput)
+      document.body.appendChild(submitInput)
+
+      controller.revealPostForm()
+
+      expect(textInput.type).toEqual('text')
+      expect(submitInput.type).toEqual('submit')
+    })
   })
 })
