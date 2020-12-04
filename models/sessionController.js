@@ -8,7 +8,11 @@ export default class SessionController {
       const result = await fetch(
         "https://chitter-backend-api-v2.herokuapp.com/sessions", {
         method: 'POST',
-        body: JSON.stringify({session: {handle: `${handle}`, password:`${password}`}}),
+        body: JSON.stringify({session: 
+          {
+            handle: `${handle}`, password:`${password}`
+          }
+        }),
         dataType: 'json',
         headers: {
           'Content-Type': 'application/json'
