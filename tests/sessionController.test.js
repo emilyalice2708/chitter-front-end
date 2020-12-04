@@ -4,7 +4,7 @@ import PeepViewController from '../models/peepViewController.js';
 
 jest.mock('../models/peepViewController')
 
-describe('signIn', () => {
+describe('SessionController', () => {
   const mockFetch = jest.fn().mockResolvedValue({
     json: () => { return [{user: {handle: "newuser", password: "pword"}}] }
   })
@@ -35,7 +35,7 @@ describe('signIn', () => {
     it('displays a sign-in error to the user', () => {
       controller.invalidSession()
       const error = document.getElementById('sign-in-error')
-      
+
       expect(error.innerHTML).toEqual('Incorrect user or password!')
     })
   })
