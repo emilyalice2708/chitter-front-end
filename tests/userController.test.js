@@ -19,7 +19,7 @@ describe('signUp', () => {
   })
 
   describe('signUp', () => {
-    it('calls fetch with the handle and password', async () => {
+    it('calls fetch to correct url with user data', async () => {
       const dataBody = "{\"user\":{\"handle\":\"newuser\",\"password\":\"pword\"}}"
       const url = "https://chitter-backend-api-v2.herokuapp.com/users"
       try {
